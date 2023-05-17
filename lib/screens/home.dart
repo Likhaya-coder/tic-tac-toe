@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe_game/screens/game.dart';
+import 'package:tic_tac_toe_game/constant.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -72,10 +73,7 @@ class _HomeState extends State<Home> {
                 },
                 child: const Text(
                   'Start',
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    color: Colors.white,
-                  ),
+                  style: kStartButton,
                 ),
               ),
             ),

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-
-const kSizeBox = TextStyle(
-  fontSize: 20.0,
-  fontWeight: FontWeight.bold,
-  color: Colors.white,
-);
+import 'package:tic_tac_toe_game/constant.dart';
 
 class Game extends StatefulWidget {
   final String player1;
@@ -58,32 +53,28 @@ class _GameState extends State<Game> {
               flex: 1,
               child: Container(
                 margin: const EdgeInsets.only(top: 2.0),
-                // decoration: const BoxDecoration(
-                //   color: Colors.limeAccent,
-                // ),
                 child: Row(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
+                          padding: const EdgeInsets.only(left: 50.0),
                           child: SizedBox(
-                            width: 270.0,
+                            width: MediaQuery.of(context).size.width / 2 - 50,
                             height: 100.0,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(player1, style: kSizeBox),
+                                Text(player1, style: kPlayers),
                                 const SizedBox(height: 10.0),
                                 const Text(
                                   '1st Player',
-                                  style: TextStyle(color: Colors.white),
+                                  style: kWhiteText,
                                 ),
                                 const SizedBox(height: 10.0),
                                 Text(
                                   'Score $scoreO',
-                                  style: TextStyle(color: Colors.yellow),
+                                  style: kYellowText,
                                 ),
                               ],
                             ),
@@ -92,26 +83,29 @@ class _GameState extends State<Game> {
                       ],
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: 100.0,
-                          height: 100.0,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(player2, style: kSizeBox),
-                              const SizedBox(height: 10.0),
-                              const Text(
-                                '2nd Player',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              const SizedBox(height: 10.0),
-                              Text(
-                                'Score $scoreX',
-                                style: TextStyle(color: Colors.yellow),
-                              ),
-                            ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50.0),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width / 2 - 50,
+                            height: 100.0,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(player2, style: kPlayers),
+                                const SizedBox(height: 10.0),
+                                const Text(
+                                  '2nd Player',
+                                  style: kWhiteText,
+                                ),
+                                const SizedBox(height: 10.0),
+                                Text(
+                                  'Score $scoreX',
+                                  style: kYellowText,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -121,9 +115,9 @@ class _GameState extends State<Game> {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 2,
               child: GridView.builder(
-                padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 0),
+                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0),
                 itemCount: playerMoves.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3),
@@ -152,7 +146,7 @@ class _GameState extends State<Game> {
                           child: Center(
                             child: Text(
                               playerMoves[index],
-                              style: kSizeBox,
+                              style: kPlayers,
                             ),
                           ),
                         ),
@@ -166,9 +160,6 @@ class _GameState extends State<Game> {
               flex: 1,
               child: Container(
                 margin: const EdgeInsets.only(top: 2.0),
-                // decoration: const BoxDecoration(
-                //   color: Colors.lightGreen,
-                // ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -177,21 +168,27 @@ class _GameState extends State<Game> {
                         padding: const EdgeInsets.only(top: 18.0),
                         child: Text(
                           currentWinner,
-                          style: kSizeBox,
+                          style: kPlayers,
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        minimumSize: Size(double.infinity, 60.0),
+                    const SizedBox(height: 20.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 128.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          minimumSize: const Size(double.infinity, 60.0),
+                        ),
+                        onPressed: () {
+                          _clearBoxes();
+                          isMatchIndexes = [];
+                        },
+                        child: Text(
+                          playButtonText,
+                          style: kStartButton,
+                        ),
                       ),
-                      onPressed: () {
-                        _clearBoxes();
-                        isMatchIndexes = [];
-                      },
-                      child: Text(playButtonText),
                     ),
                   ],
                 ),
@@ -318,6 +315,7 @@ class _GameState extends State<Game> {
     if (!winnerFound && filledBoxes == 9) {
       setState(() {
         currentWinner = "It's a tie";
+        playButtonText = "Play again";
       });
     }
   }
