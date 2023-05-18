@@ -174,7 +174,7 @@ class _GameState extends State<Game> {
                     ),
                     const SizedBox(height: 20.0),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 128.0),
+                      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 100.0),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,

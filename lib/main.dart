@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe_game/screens/home.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
       title: 'Tic-Tac-Toe',
       theme: ThemeData(
         primaryColor: Colors.white,
-      ),
+      ),      debugShowCheckedModeBanner: false,
+
       home: const Home(),
     );
   }
